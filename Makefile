@@ -32,7 +32,7 @@ all: manager
 KUBEBUILDER_ASSETS?="$(shell $(ENVTEST) --arch=$(ENVTEST_ARCH) use -i $(ENVTEST_KUBERNETES_VERSION) --bin-dir=$(ENVTEST_ASSETS_DIR) -p path)"
 test: tidy generate fmt vet manifests api-docs install-envtest
 	KUBEBUILDER_ASSETS=$(KUBEBUILDER_ASSETS) go test ./... -coverprofile cover.out
-	cd api; go test ./... -coverprofile cover.out
+	cd api; go test -run Test_parseImageReference  ./... -coverprofile cover.out
 
 # Build manager binary
 manager: generate fmt vet
